@@ -6,10 +6,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const server = app.listen(process.env.PORT || 8080);
+const port = server.address().port;
+console.log("App now running on port", port);
 
-app.post('/', async (req, res) => {
-    const port = server.address().port;
-    console.log("App now running on port", port);
+app.post('/', async (req, res) => {  
 
     // console.log({ req });
     // console.log( Object.keys(req) );

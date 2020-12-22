@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const pluginProxy = require('puppeteer-extra-plugin-proxy');
 const axios = require('axios');
 
 const HttpsProxyAgent = require('https-proxy-agent');
@@ -132,7 +133,7 @@ const prepareProxy = async () => {
     // proxy_address = "196.18.218.63",
     // proxy_address = "196.19.224.63",
     
-    proxy_address = "196.18.218.69",
+    address = "196.18.218.69",
     // proxy_address = "196.19.224.68",
     // proxy_address = "196.19.226.69",
     // proxy_address = "196.19.226.68",
@@ -141,14 +142,14 @@ const prepareProxy = async () => {
     port = 4444,
     protocol = "http";
   // const proxyArgString = `--proxy-server=${protocol}://${proxy_address}:${port}`;
-  const proxyArgString = `--proxy-server=${proxy_address}:${port}`;
+  const proxyArgString = `--proxy-server=${address}:${port}`;
 
   return {
     username,
     password,
     proxyArgString,
     port,
-    proxy_address,
+    address,
     protocol
   }
 }
@@ -183,9 +184,28 @@ exports.scrapeTag = async (tag, limit) => {
           proxyArgString,
           port,
           protocol,
-          proxy_address
+          address
         } = await prepareProxy());
-        args.push(proxyArgString);
+
+        console.log('pluginProxy', {
+          username,
+          password,
+          proxyArgString,
+          port,
+          protocol,
+          address
+        });
+
+        /*
+        puppeteer.use(pluginProxy({
+          address,
+          port,
+          credentials: {
+            username,
+            password,
+            }
+          }));
+        */
       }
 
       const options = {
@@ -223,6 +243,8 @@ exports.scrapeTag = async (tag, limit) => {
       page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36");
       await page.goto(listURL + tag);
       const body = await page.evaluate(() => document.body.innerHTML);
+
+      // await page.screenshot({path: 'buddy-screenshot.png'});
 /*
       */
 
