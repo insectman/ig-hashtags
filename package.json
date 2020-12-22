@@ -1,0 +1,22 @@
+{
+  "name": "ig-hashtags",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.21.0",
+    "express": "^4.17.1",
+    "https-proxy-agent": "^5.0.0",
+    "node-fetch": "^2.6.1",
+    "puppeteer-extra": "^3.1.15",
+    "puppeteer-extra-plugin-stealth": "^2.6.5",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
