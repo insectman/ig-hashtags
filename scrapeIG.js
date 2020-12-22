@@ -199,7 +199,13 @@ exports.scrapeTag = async (tag, limit) => {
       console.log('1111111111111');
       
       // const browser = await puppeteer.launch(options);
-      const browser = await puppeteer.launch({ headless: true });
+      const browser = await puppeteer.launch({ 
+        headless: true,
+        args : [
+          '--no-sandbox',
+          '--disable-setuid-sandbox'
+        ]
+      });
 
       console.log('2222222222222');
       
