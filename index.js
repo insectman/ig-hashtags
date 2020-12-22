@@ -8,6 +8,9 @@ app.post('/', async (req, res) => {
     const port = server.address().port;
     console.log("App now running on port", port);
 
+    console.log({ req });
+    console.log( Object.keys(req) );
+
     const { tag, limit = 2 } = req.body;
 
     console.log({ tag, limit });
