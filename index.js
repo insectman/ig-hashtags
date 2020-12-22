@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 
-const server = app.listen(process.env.PORT || 8080, function () {
+const server = app.listen(process.env.PORT || 8080, async () => {
     const port = server.address().port;
     console.log("App now running on port", port);
 
